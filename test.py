@@ -17,4 +17,20 @@ def load_data_from_csv(file_path):
 def evaluate_model():
     # Check if the model exists
     if not os.path.exists(MODEL_PATH):
-        raise FileNotFoundError("Model not found! Please train the model by running 'main
+        raise FileNotFoundError("Model not found! Please train the model by running 'main.py' first.")
+    
+    # Load model and test
+    with open(MODEL_PATH, 'rb') as file:
+        model = pickle.load(file)
+
+    house_sizes, house_prices = load_data_from_csv(TEST_CSV_FILE_PATH)
+    predictions = model.predict(house_sizes)
+
+    mse = mean_squared_error(house_prices, predictions)
+    r2 = r2_score(house_prices, predictions)
+
+    print(f"Mean Squared Error: {mse}")
+    print(f"R2 Score: {r2}")
+
+if __name__ == "__main__":
+    evaluate_model()
