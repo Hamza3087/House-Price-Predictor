@@ -23,10 +23,19 @@ except (FileNotFoundError, IOError, pickle.UnpicklingError) as e:
 
 @app.route('/')
 def home():
+    """
+    Render the home page.
+    """
     return render_template('index.html')
 
 @app.route('/predict_price/', methods=['POST'])
 def predict_price():
+    """
+    Predict house price based on features provided in the POST request.
+
+    Returns:
+        json: Predicted price or error message.
+    """
     if not MODEL:
         return jsonify({"error": "Model not loaded. Please train the model first."}), 500
 
@@ -53,10 +62,11 @@ def predict_price():
     except (ValueError, KeyError) as e:
         return jsonify({"error": f"Value error: {str(e)}"}), 400
 
+    except (FileNotFoundError, IOError, pickle.UnpicklingError) as e:
+        return jsonify({"error": f"Model error: {str(e)}"}), 500
+
     except Exception as e:
-        return jsonify({
-            "error": f"An error occurred: {str(e)}"
-        }), 500
+        return jsonify({"error": f"An unexpected error occurred: {str(e)}"}), 500
 
 if __name__ == "__main__":
     app.run(debug=True)
