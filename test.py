@@ -43,8 +43,9 @@ def evaluate_model():
     mse = mean_squared_error(house_prices, predictions)
     r2 = r2_score(house_prices, predictions)
 
-    print(f"Mean Squared Error: {mse}")
-    print(f"R2 Score: {r2}")
+    # Breaking long line into shorter lines
+    print(f"Model evaluation completed. Mean Squared Error: {mse}, "
+          f"R2 Score: {r2}")
 
 if __name__ == "__main__":
     evaluate_model()
