@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-      - feature-model-training
-      - feature-api
-      - feature-frontend
 
 jobs:
   test:
@@ -24,11 +21,11 @@ jobs:
 
       - name: Fetch and checkout files from feature-model-training
         run: |
-          git checkout origin/feature-model-training -- main.py house_data.csv test.py house_test_data.csv
+          git checkout origin/main -- main.py house_data.csv test.py house_test_data.csv
 
       - name: Fetch and checkout app.py from feature-api
         run: |
-          git checkout origin/feature-api -- app.py
+          git checkout origin/main -- app.py
 
       - name: Install dependencies
         run: |
