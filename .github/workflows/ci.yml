@@ -22,15 +22,15 @@ jobs:
         with:
           python-version: '3.8'
 
-      - name: Fetch and checkout `main.py` from `feature-model-training`
+      - name: Fetch and checkout main.py from feature-model-training
         run: |
           git checkout origin/feature-model-training -- main.py
 
-      - name: Fetch and checkout `app.py` from `feature-api`
+      - name: Fetch and checkout app.py from feature-api
         run: |
           git checkout origin/feature-api -- app.py
 
-      - name: Fetch and checkout `test.py` from `feature-model-training`
+      - name: Fetch and checkout test.py from feature-model-training
         run: |
           git checkout origin/feature-model-training -- test.py
 
