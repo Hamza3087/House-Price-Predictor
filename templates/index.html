@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Prediction</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e0f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #00796b;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #004d40;
+        }
+        input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #00796b;
+            border-radius: 6px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+        }
+        button {
+            background-color: #004d40;
+            color: #ffffff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #00332a;
+        }
+        #result {
+            font-size: 20px;
+            font-weight: bold;
+            color: #00796b;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>House Price Prediction</h1>
+        <form id="predictionForm">
+            <label for="size">House Size (sq ft):</label>
+            <input type="number" id="size" name="size" required>
+            <label for="bedrooms">Number of Bedrooms:</label>
+            <input type="number" id="bedrooms" name="bedrooms" required>
+            <label for="bathrooms">Number of Bathrooms:</label>
+            <input type="number" id="bathrooms" name="bathrooms" required>
+            <button type="submit">Predict Price</button>
+        </form>
+        <p id="result"></p>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('predictionForm').onsubmit = async function(event) {
+                event.preventDefault();
+                
+                const size = document.getElementById('size').value;
+                const bedrooms = document.getElementById('bedrooms').value;
+                const bathrooms = document.getElementById('bathrooms').value;
+                
+                const response = await fetch('/predict_price/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        size: size,
+                        bedrooms: bedrooms,
+                        bathrooms: bathrooms
+                    })
+                });
+                
+                const result = await response.json();
+                document.getElementById('result').textContent = `Predicted House Price: ${result.predicted_price}`;
+            };
+        });
+    </script>
+</body>
+</html>
