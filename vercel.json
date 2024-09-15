@@ -2,16 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "feature-api/app.py",
+      "src": "app.py",
       "use": "@vercel/python"
-    },
-    {
-      "src": "feature-frontend/**",
-      "use": "@vercel/static"
     }
   ],
   "routes": [
-    { "src": "/api/predict_price", "dest": "feature-api/app.py" },
-    { "src": "/(.*)", "dest": "feature-frontend/$1" }
+    {
+      "src": "/(.*)",
+      "dest": "app.py"
+    }
   ]
 }
