@@ -30,9 +30,9 @@ jobs:
         run: |
           git checkout origin/feature-api -- app.py
 
-      - name: Fetch and checkout `test_model.py` from `feature-model-training`
+      - name: Fetch and checkout `test.py` from `feature-model-training`
         run: |
-          git checkout origin/feature-model-training -- test_model.py
+          git checkout origin/feature-model-training -- test.py
 
       - name: Install dependencies
         run: |
