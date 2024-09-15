@@ -1,7 +1,10 @@
+"""
+Module for serving the linear regression model using Flask.
+"""
 import os  # Standard library imports
 import pickle
-import numpy as np  # Third-party imports
 from flask import Flask, request, jsonify, render_template
+import numpy as np  # Third-party imports
 
 app = Flask(__name__)
 
