@@ -29,7 +29,9 @@ def evaluate_model():
         FileNotFoundError: If the model file does not exist.
     """
     if not os.path.exists(MODEL_PATH):
-        raise FileNotFoundError("Model not found! Please train the model by running 'main.py' first.")
+        raise FileNotFoundError(
+            "Model not found! Please train the model by running 'main.py' first."
+        )
 
     with open(MODEL_PATH, 'rb') as file:
         model = pickle.load(file)
@@ -39,8 +41,7 @@ def evaluate_model():
     mse = mean_squared_error(house_prices, predictions)
     r2 = r2_score(house_prices, predictions)
 
-    # Breaking long line into shorter lines
-    print(f"Model evaluation completed.")
+    print("Model evaluation completed.")
     print(f"Mean Squared Error: {mse}")
     print(f"R2 Score: {r2}")
 
