@@ -4,32 +4,43 @@ on:
   push:
     branches:
       - main
-      - feature-frontend
-      - feature-api
       - feature-model-training
+      - feature-api
+      - feature-frontend
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v2
         with:
           python-version: '3.8'
+
+      - name: Fetch `main.py` from `feature-model-training`
+        run: |
+          git fetch origin feature-model-training
+          git checkout origin/feature-model-training -- main.py
+
+      - name: Fetch `app.py` from `feature-api`
+        run: |
+          git fetch origin feature-api
+          git checkout origin/feature-api -- app.py
+
+      - name: Fetch `test.py` from `feature-model-training`
+        run: |
+          git fetch origin feature-model-training
+          git checkout origin/feature-model-training -- test.py
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run tests
-        run: |
-          python -m unittest discover
-
-      - name: Lint code
+      - name: Run lint and tests
         run: |
           pylint main.py app.py test.py
+          pytest
