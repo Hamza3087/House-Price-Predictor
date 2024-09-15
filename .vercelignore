@@ -1,9 +1,33 @@
-.vercel
-.gitignore
-README.md
-requirements.txt
-*.csv
-*.pkl
-*.sh
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+venv/
+env/
+*.env
+
+# Log files
+*.log
+
+# Docker files
 Dockerfile.*
 build.sh
+
+# Datasets (add large CSVs or other data files)
+*.csv
+
+# Model files (for large machine learning models)
+*.pkl
+*.h5
+
+# Vercel configuration (optional, if not needed in the repo)
+.vercel/
+
+# GitHub workflows (if these are not needed for deployment)
+.github/
+
+# Ignore other large files that are not necessary for deployment
+static/
+templates/
+test.py
