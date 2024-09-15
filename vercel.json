@@ -2,6 +2,11 @@
   "version": 2,
   "builds": [
     {
+      "src": "feature-model-training/main.py",
+      "use": "@vercel/python",
+      "config": { "distDir": "feature-model-training" }
+    },
+    {
       "src": "build.sh",
       "use": "@vercel/static-build",
       "config": { "distDir": "feature-api" }
