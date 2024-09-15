@@ -2,6 +2,11 @@
   "version": 2,
   "builds": [
     {
+      "src": "build.sh",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "feature-api" }
+    },
+    {
       "src": "feature-api/app.py",
       "use": "@vercel/python"
     },
@@ -11,13 +16,7 @@
     }
   ],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "feature-api/app.py"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "feature-frontend/$1"
-    }
+    { "src": "/api/(.*)", "dest": "feature-api/app.py" },
+    { "src": "/(.*)", "dest": "feature-frontend/$1" }
   ]
 }
