@@ -14,9 +14,8 @@ jobs:
       with:
         python-version: '3.x'
 
-    # Install distutils to fix the missing dependency error
     - name: Install Python build tools
-      run: sudo apt-get install python3-distutils -y
+      run: sudo apt-get update && sudo apt-get install python3-distutils -y
 
     - name: Install dependencies
       run: |
