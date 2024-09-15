@@ -1,13 +1,14 @@
 """
 Module for evaluating the linear regression model and running tests.
 """
-import pytest
-import pickle
 import os
+import pickle
 import pandas as pd
 from sklearn.metrics import mean_squared_error, r2_score
+
 MODEL_PATH = 'model.pkl'
 TEST_CSV_FILE_PATH = 'house_test_data.csv'
+
 def load_data_from_csv(file_path):
     """
     Load dataset from CSV.
@@ -20,6 +21,7 @@ def load_data_from_csv(file_path):
     house_sizes = data[['Size', 'Bedrooms', 'Bathrooms']].values
     house_prices = data['Price'].values
     return house_sizes, house_prices
+
 def evaluate_model():
     """
     Evaluate the model's performance on test data.
@@ -40,6 +42,7 @@ def evaluate_model():
     print(f"Mean Squared Error: {mse}")
     print(f"R2 Score: {r2}")
     return mse, r2
+
 # Pytest functions
 def test_load_data_from_csv():
     """Test if data is loaded correctly from CSV."""
@@ -47,14 +50,17 @@ def test_load_data_from_csv():
     assert len(house_sizes) > 0
     assert len(house_prices) > 0
     assert len(house_sizes) == len(house_prices)
+
 def test_model_file_exists():
     """Test if the model file exists."""
     assert os.path.exists(MODEL_PATH), "Model file does not exist"
+
 def test_evaluate_model():
     """Test if the model evaluation runs without errors and returns expected types."""
     mse, r2 = evaluate_model()
     assert isinstance(mse, float)
     assert isinstance(r2, float)
     assert 0 <= r2 <= 1, "R2 score should be between 0 and 1"
-if name == "main":
+
+if __name__ == "__main__":
     evaluate_model()
