@@ -7,13 +7,13 @@
       "config": { "distDir": "feature-model-training" }
     },
     {
+      "src": "feature-api/app.py",
+      "use": "@vercel/python"
+    },
+    {
       "src": "build.sh",
       "use": "@vercel/static-build",
       "config": { "distDir": "feature-api" }
-    },
-    {
-      "src": "feature-api/app.py",
-      "use": "@vercel/python"
     },
     {
       "src": "feature-frontend/**",
