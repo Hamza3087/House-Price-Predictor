@@ -1,0 +1,9 @@
+.vercel
+.gitignore
+README.md
+requirements.txt
+*.csv
+*.pkl
+*.sh
+Dockerfile.*
+build.sh
