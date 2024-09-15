@@ -1,6 +1,5 @@
-setuptools>=58.0.0
-Flask==2.3.2  # Flask web framework for building the API
-pandas==2.0.3  # Data manipulation library (used in data preprocessing)
-scikit-learn==1.3.0  # Machine learning library (used for model training)
-gunicorn==20.1.0  # WSGI server for running Flask in production
-pytest==7.4.2  # Testing framework (used for running unit tests)
+Flask==2.1.2
+scikit-learn==1.0.2
+pandas==1.4.2
+joblib==1.1.0
+requests==2.27.1
