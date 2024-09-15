@@ -1,7 +1,6 @@
 """
 Module for training a linear regression model on house price data.
 """
-import os
 import pickle  # Standard library imports
 import pandas as pd  # Third-party imports
 from sklearn.linear_model import LinearRegression
