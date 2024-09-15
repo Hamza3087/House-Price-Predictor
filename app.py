@@ -68,8 +68,5 @@ def predict_price():
     except (FileNotFoundError, IOError, pickle.UnpicklingError) as e:
         return jsonify({"error": f"Model error: {str(e)}"}), 500
 
-    except Exception as e:
+    except (TypeError, AttributeError) as e:
         return jsonify({"error": f"An unexpected error occurred: {str(e)}"}), 500
-
-if __name__ == "__main__":
-    app.run(debug=True)
