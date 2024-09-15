@@ -39,6 +39,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Train model and generate test data
+        run: |
+          python main.py  # This step should train the model and save `model.pkl`
+          # Add command to generate `house_test_data.csv` if needed
+          # e.g., python scripts/generate_test_data.py or similar if applicable
+
       - name: Run lint and tests
         run: |
           pylint main.py app.py test.py
