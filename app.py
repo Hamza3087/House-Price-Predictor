@@ -1,6 +1,3 @@
-"""
-Flask web application for predicting house prices using a trained linear regression model.
-"""
 import os  # Standard library imports
 import pickle
 import numpy as np  # Third-party imports
@@ -15,34 +12,22 @@ MODEL_PATH = 'model.pkl'
 try:
     if os.path.exists(MODEL_PATH):
         with open(MODEL_PATH, 'rb') as file:
-            model = pickle.load(file)
+            MODEL = pickle.load(file)
     else:
-        raise FileNotFoundError("Model not found! Please train the model by running 'main.py' first.")
-except Exception as e:
-    model = None
+        raise FileNotFoundError(
+            "Model not found! Please train the model by running 'main.py' first."
+        )
+except (FileNotFoundError, IOError, pickle.UnpicklingError) as e:
+    MODEL = None
     print(f"Error loading model: {e}")
 
 @app.route('/')
 def home():
-    """
-    Render the homepage.
-
-    This function serves the index.html page at the root URL.
-    """
     return render_template('index.html')
 
 @app.route('/predict_price/', methods=['POST'])
 def predict_price():
-    """
-    Predict the house price based on user input.
-
-    This function receives house details from a POST request, uses the trained model
-    to predict the price, and returns the predicted price as JSON.
-    
-    Returns:
-        json: JSON object with the predicted price or an error message.
-    """
-    if not model:
+    if not MODEL:
         return jsonify({"error": "Model not loaded. Please train the model first."}), 500
 
     try:
@@ -61,16 +46,17 @@ def predict_price():
         features = np.array([[size, bedrooms, bathrooms]])
 
         # Make prediction
-        predicted_price = model.predict(features)[0]
+        predicted_price = MODEL.predict(features)[0]
 
         return jsonify({"predicted_price": predicted_price})
 
-    except ValueError as ve:
-        return jsonify({"error": f"Value error: {str(ve)}"}), 400
+    except (ValueError, KeyError) as e:
+        return jsonify({"error": f"Value error: {str(e)}"}), 400
 
     except Exception as e:
-        return jsonify({"error": f"An error occurred: {str(e)}"}), 500
-
+        return jsonify({
+            "error": f"An error occurred: {str(e)}"
+        }), 500
 
 if __name__ == "__main__":
     app.run(debug=True)
